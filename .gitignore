@@ -1,2 +1,3 @@
 salt/base/pkg/files/
 salt/base/postgresql/files/
+salt/base/*/files/
