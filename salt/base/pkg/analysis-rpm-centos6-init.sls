@@ -177,3 +177,29 @@ swig:
     - unless: rpm -qa | grep swig
     - require:
       - file: swig
+
+bash:
+  file.managed:
+    - name: /usr/local/src/bash-4.1.2-29.el6.x86_64.rpm
+    - source: salt://base/pkg/files/bash-4.1.2-29.el6.x86_64.rpm
+    - user: root
+    - group: root
+    - mode: 644
+
+  cmd.run:
+    - name: yum -y localinstall /usr/local/src/bash-4.1.2-29.el6.x86_64.rpm --disablerepo=\*
+    - require:
+      - file: bash
+
+meld3:
+  file.managed:
+    - name: /usr/local/src/meld3-1.0.0-1.noarch.rpm
+    - source: salt://base/pkg/files/meld3-1.0.0-1.noarch.rpm
+    - user: root
+    - group: root
+    - mode: 644
+
+  cmd.run:
+    - name: yum -y localinstall /usr/local/src/meld3-1.0.0-1.noarch.rpm --disablerepo=\*
+    - require:
+      - file: bash
