@@ -1,0 +1,3 @@
+#!/bin/bash
+
+# this script is used to sync the latest code from git and svn
