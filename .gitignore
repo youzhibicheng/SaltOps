@@ -1,3 +1,5 @@
 salt/base/pkg/files/
 salt/base/postgresql/files/
 salt/base/*/files/
+formulas/
+/srv/salt/base/java/files/

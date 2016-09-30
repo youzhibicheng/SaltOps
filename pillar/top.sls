@@ -1,5 +1,3 @@
 base:
   '*':
-    - git
-    - svn
-
+    - java
