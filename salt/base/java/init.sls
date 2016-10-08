@@ -33,35 +33,20 @@ unpack-jdk-tarball:
     - archive_user: root
     - if_missing: {{ java.java_real_home }}
 
-create-bin-java:
+create-java-home:
   alternatives.install:
-    - name: java
-    - link: /usr/bin/java
-    - path: {{ java.java_real_home }}/bin/java
+    - name: java-home
+    - link: {{ java.java_home }}
+    - path: {{ java.java_real_home }}
     - priority: 30
-    - onlyif: test -f {{ java.java_real_home }}/bin/java
+    - onlyif: test -d {{ java.java_real_home }} && test ! -L {{ java.java_home }}
     - require:
       - archive: unpack-jdk-tarball
 
-create-bin-javac:
-  alternatives.install:
-    - name: javac
-    - link: /usr/bin/javac
-    - path: {{ java.java_real_home }}/bin/javac
-    - priority: 30
-    - onlyif: test -f {{ java.java_real_home }}/bin/javac
-    - require:
-      - archive: unpack-jdk-tarball
-
-create-bin-jar:
-  alternatives.install:
-    - name: jar
-    - link: /usr/bin/jar
-    - path: {{ java.java_real_home }}/bin/jar
-    - priority: 30
-    - onlyif: test -f {{ java.java_real_home }}/bin/jar
-    - require:
-      - archive: unpack-jdk-tarball
+update-java-home-symlink:
+  file.symlink:
+    - name: {{ java.java_home }}
+    - target: {{ java.java_real_home }}
 
 remove-jdk-tarball:
   file.absent:
